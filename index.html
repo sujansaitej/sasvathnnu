@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameForge Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #000000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            color: #1e90ff;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #1e90ff;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('assets/images/hero-bg.jpg') no-repeat center/cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9));
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 48px;
+            color: #1e90ff;
+            margin-bottom: 20px;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px #1e90ff, 0 0 20px #1e90ff; }
+            50% { text-shadow: 0 0 20px #1e90ff, 0 0 30px #1e90ff; }
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .music-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 10px #1e90ff;
+        }
+
+        /* Games Section */
+        #games {
+            padding: 100px 0;
+            background: #1a1a1a;
+        }
+
+        #games h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #1e90ff;
+        }
+
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .game-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid #1e90ff;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 0 15px;
+            perspective: 1200px;
+            transform-style: preserve-3d;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            min-width: calc(100% - 30px);
+            box-sizing: border-box;
+        }
+
+        .game-card.active {
+            box-shadow: 0 0 20px #1e90ff;
+        }
+
+        .game-card:hover {
+            transform: translateZ(20px) rotateX(8deg) rotateY(8deg);
+            box-shadow: 0 12px 24px rgba(30, 144, 255, 0.4);
+        }
+
+        .game-image {
+            display: block;
+            margin: 0 auto;
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.4s ease;
+            transform-style: preserve-3d;
+        }
+
+        .game-card:hover .game-image {
+            transform: translateZ(30px) rotateX(12deg) rotateY(12deg);
+        }
+
+        .large-image {
+            max-height: 650px;
+        }
+
+        .game-image:not(.large-image) {
+            max-height: 450px;
+        }
+
+        .game-title {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+
+        .game-logo {
+            width: 50px;
+            height: 25px;
+            margin-right: 10px;
+            transition: transform 0.4s ease;
+            filter: drop-shadow(0 0 5px #1e90ff);
+        }
+
+        .game-title:hover .game-logo {
+            transform: perspective(500px) rotateY(10deg);
+        }
+
+        .game-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            color: #1e90ff;
+        }
+
+        .game-card p {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .game-card .price {
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .game-card button {
+            background: #1e90ff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .game-card button:hover {
+            background: #1565c0;
+            box-shadow: 0 0 15px #1e90ff;
+        }
+
+        .carousel-prev, .carousel-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #1e90ff;
+            color: #1e90ff;
+            font-size: 24px;
+            padding: 10px 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .carousel-prev:hover, .carousel-next:hover {
+            background: #1e90ff;
+            color: #fff;
+            box-shadow: 0 0 10px #1e90ff;
+        }
+
+        .carousel-prev {
+            left: 10px;
+        }
+
+        .carousel-next {
+            right: 10px;
+        }
+
+        /* About Section */
+        #about {
+            padding: 100px 0;
+            background: url('assets/images/about-bg.jpg') no-repeat center/cover;
+            position: relative;
+            background-color: #1a1a1a;
+        }
+
+        #about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9));
+        }
+
+        #about h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #1e90ff;
+            position: relative;
+        }
+
+        #about p {
+            font-size: 18px;
+            line-height: 1.6;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Contact Section */
+        #contact {
+            padding: 100px 0;
+            background: #1a1a1a;
+            text-align: center;
+        }
+
+        #contact h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: #1e90ff;
+        }
+
+        #contact p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        #contact a {
+            color: #1e90ff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        #contact a:hover {
+            color: #ffd700;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            .hero-content h1 {
+                font-size: 32px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .carousel {
+                max-width: 100%;
+            }
+
+            .game-card {
+                margin: 0 10px;
+            }
+
+            .game-logo {
+                width: 40px;
+                height: 20px;
+            }
+
+            .game-image {
+                max-height: 300px;
+            }
+
+            .large-image {
+                max-height: 400px;
+            }
+        }
+
+        /* Scroll Animation */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">GameForge Studio</div>
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#games">Games</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <div class="hero-content">
+            <h1>Welcome to GameForge Studio</h1>
+            <p>Experience the thrill of gaming with our cutting-edge titles!</p>
+        </div>
+        <div class="music-toggle">
+            <img src="https://raw.githubusercontent.com/sasvanthu/TECHIEHELP_Game-Development-Agency-Frontend-Website/main/Assets/controller-icon.png" alt="Music Toggle" width="30">
+        </div>
+    </section>
+
+    <section id="games" class="container">
+        <h2>Our Games</h2>
+        <div class="carousel">
+            <div class="carousel-inner">
+                <div class="game-card animate-on-scroll">
+                    <img src="https://raw.githubusercontent.com/sasvanthu/TECHIEHELP_Game-Development-Agency-Frontend-Website/main/Assets/Asphalt%20game.jpg" alt="Asphalt 9: Legends" class="game-image">
+                    <div class="game-title">
+                        <img src="https://raw.githubusercontent.com/sasvanthu/TECHIEHELP_Game-Development-Agency-Frontend-Website/main/Assets/Asphalt%20logo.jpg" alt="Asphalt 9 Logo" class="game-logo">
+                        <h3>Asphalt 9: Legends</h3>
+                    </div>
+                    <p>High-speed arcade racing with luxury cars.</p>
+                    <p class="price">₹599</p>
+                    <button>Purchase Now</button>
+                </div>
+                <div class="game-card animate-on-scroll">
+                    <img src="https://raw.githubusercontent.com/sasvanthu/TECHIEHELP_Game-Development-Agency-Frontend-Website/main/Assets/nfs%20game.jpg" alt="Need for Speed: Heat" class="game-image large-image">
+                    <div class="game-title">
+                        <img src="https://raw.githubusercontent.com/sasvanthu/TECHIEHELP_Game-Development-Agency-Frontend-Website/main/Assets/nfs%20logo.jpg" alt="Need for Speed: Heat Logo" class="game-logo">
+                        <h3>Need for Speed: Heat</h3>
+                    </div>
+                    <p>Street-style racing game with cops and nighttime drives.</p>
+                    <p class="price">₹799</p>
+                    <button>Purchase Now</button>
+                </div>
+                <div class="game-card animate-on-scroll">
+                    <img src="https://raw.githubusercontent.com/sasvanthu/TECHIEHELP_Game-Development-Agency-Frontend-Website/main/Assets/forza%205%20game.jpg" alt="Forza Horizon 5" class="game-image large-image">
+                    <div class="game-title">
+                        <img src="https://raw.githubusercontent.com/sasvanthu/TECHIEHELP_Game-Development-Agency-Frontend-Website/main/Assets/forza%205%20logo.jpg" alt="Forza Horizon 5 Logo" class="game-logo">
+                        <h3>Forza Horizon 5</h3>
+                    </div>
+                    <p>Open-world racing game with dynamic weather and terrain.</p>
+                    <p class="price">₹1499</p>
+                    <button>Purchase Now</button>
+                </div>
+            </div>
+            <button class="carousel-prev">❮</button>
+            <button class="carousel-next">❯</button>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>GameForge Studio is a passionate team of developers creating immersive gaming experiences. We specialize in high-octane racing games with stunning visuals and innovative gameplay.</p>
+        </div>
+    </section>
+
+    <section id="contact" class="container">
+        <h2>Contact Us</h2>
+        <p>Have questions? Reach out to us at <a href="mailto:contact@gameforgestudio.com">contact@gameforgestudio.com</a></p>
+    </section>
+
+    <audio id="bg-music" loop>
+        <source src="assets/audio/background-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Music Toggle
+        const musicToggle = document.querySelector('.music-toggle');
+        const bgMusic = document.getElementById('bg-music');
+        let isPlaying = false;
+
+        musicToggle.addEventListener('click', () => {
+            if (isPlaying) {
+                bgMusic.pause();
+            } else {
+                bgMusic.play();
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // Scroll Animations
+        const animateElements = document.querySelectorAll('.animate-on-scroll');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        animateElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Smooth Scrolling for Nav Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Carousel Functionality
+        const carouselInner = document.querySelector('.carousel-inner');
+        const gameCards = document.querySelectorAll('.game-card');
+        const prevButton = document.querySelector('.carousel-prev');
+        const nextButton = document.querySelector('.carousel-next');
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+            gameCards.forEach((card, index) => {
+                card.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % gameCards.length;
+            updateCarousel();
+        });
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + gameCards.length) % gameCards.length;
+            updateCarousel();
+        });
+
+        updateCarousel();
+    </script>
+</body>
+</html>
