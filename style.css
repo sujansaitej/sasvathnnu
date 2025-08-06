@@ -1,0 +1,142 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+}
+
+body {
+    background: #0a0a1a;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* Navigation */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #00ffcc;
+    text-shadow: 0 0 10px #00ffcc;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-btn {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.1em;
+    padding: 10px 20px;
+    border: 2px solid #00ffcc;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background: #00ffcc;
+    color: #0a0a1a;
+    box-shadow: 0 0 15px #00ffcc;
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#three-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content h1 {
+    font-size: 3.5em;
+    text-shadow: 0 0 20px #00ffcc;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+.hero-content p {
+    font-size: 1.5em;
+    margin: 20px 0;
+}
+
+.cta-btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background: #00ffcc;
+    color: #0a0a1a;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 700;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #00ffcc;
+}
+
+/* Glow Animation */
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+    }
+    to {
+        text-shadow: 0 0 20px #00ffcc, 0 0 30px #00ffcc;
+    }
+}
+
+/* Section Styling */
+.section {
+    padding: 50px;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 10px;
+    }
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .hero-content h1 {
+        font-size: 2em;
+    }
+    .hero-content p {
+        font-size: 1em;
+    }
+    .section {
+        padding: 20px;
+    }
+}
