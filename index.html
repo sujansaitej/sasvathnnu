@@ -3,46 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Development Agency</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <title>GameForge Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Assets/css/styles.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="logo">GameDev Agency</div>
-        <ul class="nav-links">
-            <li><a href="#home" class="nav-btn">Home</a></li>
-            <li><a href="#about" class="nav-btn">About</a></li>
-            <li><a href="#portfolio" class="nav-btn">Portfolio</a></li>
-            <li><a href="#contact" class="nav-btn">Contact</a></li>
-        </ul>
-    </nav>
+    <header>
+        <nav class="container">
+            <div class="logo">GameForge Studio</div>
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#games">Games</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <!-- Hero Section with 3D Canvas -->
-    <section id="home" class="hero">
-        <canvas id="three-canvas"></canvas>
+    <section id="hero">
+        <canvas id="particles"></canvas>
         <div class="hero-content">
-            <h1>Welcome to GameDev Agency</h1>
-            <p>Create immersive gaming experiences with us!</p>
-            <a href="#portfolio" class="cta-btn">Explore Our Games</a>
+            <h1>Welcome to GameForge Studio</h1>
+            <p>Experience the thrill of gaming with our cutting-edge titles!</p>
+        </div>
+        <div class="music-toggle">
+            <img src="https://raw.githubusercontent.com/sasvanthu/TECHIEHELP_Game-Development-Agency-Frontend-Website/main/Assets/controller-icon.png" alt="Music Toggle" width="30">
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="section">
-        <h2>About Us</h2>
-        <p>We are a passionate team crafting cutting-edge games with stunning visuals and engaging gameplay.</p>
-    </section>
-
-    <!-- Portfolio Section (Placeholder) -->
-    <section id="portfolio" class="section">
+    <section id="games" class="container">
         <h2>Our Games</h2>
-        <p>Check out our latest projects in the gaming world!</p>
+        <div class="game-card animate-on-scroll">
+            <img src="https://raw.githubusercontent.com/sasvanthu/TECHIEHELP_Game-Development-Agency-Frontend-Website/main/Assets/Asphalt%20game.jpg" alt="Asphalt 9: Legends" class="game-image">
+            <div class="game-title">
+                <img src="https://raw.githubusercontent.com/sasvanthu/TECHIEHELP_Game-Development-Agency-Frontend-Website/main/Assets/Asphalt%20logo.jpg" alt="Asphalt 9 Logo" class="game-logo">
+                <h3>Asphalt 9: Legends</h3>
+            </div>
+            <p>High-speed arcade racing with luxury cars.</p>
+            <p class="price">₹599</p>
+            <button>Purchase Now</button>
+        </div>
+        <div class="game-card animate-on-scroll">
+            <img src="https://raw.githubusercontent.com/sasvanthu/TECHIEHELP_Game-Development-Agency-Frontend-Website/main/Assets/nfs%20game.jpg" alt="Need for Speed: Heat" class="game-image">
+            <div class="game-title">
+                <img src="https://raw.githubusercontent.com/sasvanthu/TECHIEHELP_Game-Development-Agency-Frontend-Website/main/Assets/nfs%20logo.jpg" alt="Need for Speed: Heat Logo" class="game-logo">
+                <h3>Need for Speed: Heat</h3>
+            </div>
+            <p>Street-style racing game with cops and nighttime drives.</p>
+            <p class="price">₹799</p>
+            <button>Purchase Now</button>
+        </div>
+        <div class="game-card animate-on-scroll">
+            <img src="https://raw.githubusercontent.com/sasvanthu/TECHIEHELP_Game-Development-Agency-Frontend-Website/main/Assets/forza%205%20game.jpg" alt="Forza Horizon 5" class="game-image">
+            <div class="game-title">
+                <img src="https://raw.githubusercontent.com/sasvanthu/TECHIEHELP_Game-Development-Agency-Frontend-Website/main/Assets/forza%205%20logo.jpg" alt="Forza Horizon 5 Logo" class="game-logo">
+                <h3>Forza Horizon 5</h3>
+            </div>
+            <p>Open-world racing game with dynamic weather and terrain.</p>
+            <p class="price">₹1499</p>
+            <button>Purchase Now</button>
+        </div>
     </section>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="script.js"></script>
+    <section id="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>GameForge Studio is a passionate team of developers creating immersive gaming experiences. We specialize in high-octane racing games with stunning visuals and innovative gameplay.</p>
+        </div>
+    </section>
+
+    <section id="contact" class="container">
+        <h2>Contact Us</h2>
+        <p>Have questions? Reach out to us at <a href="mailto:contact@gameforgestudio.com">contact@gameforgestudio.com</a></p>
+    </section>
+
+    <audio id="bg-music" loop>
+        <source src="Assets/audio/background-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="Assets/js/script.js"></script>
 </body>
 </html>
